@@ -238,15 +238,16 @@ export function MoneyFlow({
 export function CampaignTimeline({
   campaigns,
   currency,
+  now,
 }: {
   campaigns: Campaign[];
   currency: string;
+  /** "Today" (ms). Passed in so nothing reads the clock during prerender. */
+  now: number;
 }) {
   const [box, width] = useWidth<HTMLDivElement>(0);
   const [ref, seen] = useSeen<HTMLDivElement>();
   const [hover, setHover] = useState<number | null>(null);
-  // "Today" for the time line, read once when the chart mounts
-  const [now] = useState(() => Date.now());
 
   const H = 220;
   const axisY = H - 28;

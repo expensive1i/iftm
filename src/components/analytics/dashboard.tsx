@@ -510,7 +510,7 @@ export function AnalyticsDashboard({
                 title="Every campaign, by the day it started"
                 note="Hover a dot for its details; click to open it"
               >
-                <CampaignTimeline campaigns={campaigns} currency={cur} />
+                <CampaignTimeline campaigns={campaigns} currency={cur} now={now} />
               </ChartCard>
 
               <div className="mt-6 grid gap-6 lg:mt-8 lg:grid-cols-3 lg:items-start lg:gap-8">
