@@ -9,6 +9,9 @@ export const siteConfig = {
   appUrl:
     "https://play.google.com/store/apps/details?id=com.followthemoney.app",
   email: "hello@ifollowthemoney.org",
+  // From the current ifollowthemoney.org Contact page
+  phone: "+234 (09) 291 7545",
+  phoneHref: "tel:+23492917545",
   address: "3rd Floor, D Wing, Bassan Plaza, Central Area, Abuja",
   socials: {
     youtube: "https://www.youtube.com/channel/UCkY8c7LiVNqLCdZ47nL3aBg",

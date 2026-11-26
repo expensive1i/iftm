@@ -55,11 +55,17 @@ export function WriteOn({ as = "h2", text, className, id, lang }: Props) {
       el.dataset.written = "true";
       return;
     }
-    gsap.registerPlugin(ScrollTrigger);    const ctx = gsap.context(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    // Phones get a quicker, lighter version that starts as soon as the title
+    // peeks in, so titles are readable straight away while scrolling.
+    const phone = window.matchMedia("(max-width: 639px)").matches;
+    const ctx = gsap.context(() => {
       const all = Array.from(el.querySelectorAll("[data-word]"));
-      // A slow, even pace for titles; long statements are capped at about
-      // 2.4s of stagger so they never drag.
-      const step = Math.min(0.13, 2.4 / Math.max(all.length, 1));
+      // A slow, even pace for titles on larger screens (capped at about 2.4s
+      // of stagger); on phones about twice as fast.
+      const step = phone
+        ? Math.min(0.05, 0.9 / Math.max(all.length, 1))
+        : Math.min(0.13, 2.4 / Math.max(all.length, 1));
       const tl = gsap.timeline({ paused: true });
       // Each word unfolds: it swings down from its top edge (like a card
       // folding open towards you), rises a little and comes into focus.
@@ -67,9 +73,9 @@ export function WriteOn({ as = "h2", text, className, id, lang }: Props) {
         all,
         {
           opacity: 0,
-          rotationX: -88,
-          yPercent: 35,
-          filter: "blur(6px)",
+          rotationX: phone ? -60 : -88,
+          yPercent: phone ? 20 : 35,
+          filter: phone ? "blur(3px)" : "blur(6px)",
           transformOrigin: "50% 0%",
           transformPerspective: 700,
         },
@@ -78,7 +84,7 @@ export function WriteOn({ as = "h2", text, className, id, lang }: Props) {
           rotationX: 0,
           yPercent: 0,
           filter: "blur(0px)",
-          duration: 1.3,
+          duration: phone ? 0.6 : 1.3,
           stagger: step,
           ease: "power3.out",
         },
@@ -97,8 +103,8 @@ export function WriteOn({ as = "h2", text, className, id, lang }: Props) {
       // once it is fully off screen so the next pass writes it again.
       ScrollTrigger.create({
         trigger: el,
-        start: "top 88%",
-        end: "bottom 12%",
+        start: phone ? "top 98%" : "top 88%",
+        end: phone ? "bottom 2%" : "bottom 12%",
         onEnter: () => tl.restart(),
         onEnterBack: () => tl.restart(),
         onLeave: () => tl.pause(0),

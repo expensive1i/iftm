@@ -1,23 +1,22 @@
-import { WriteOn } from "@/components/ui/write-on";
 import { Container } from "@/components/ui/container";
+import { ScrollStatement } from "@/components/ui/scroll-statement";
 
 /*
  * Straight after the About banner: the impact statement in large type (with
- * the figures picked out as chips, like the home page statement), written
- * in on scroll, then the
- * two paragraphs about the movement at full width.
+ * the figures picked out as chips), written word by word as you scroll,
+ * exactly like the statement under the home page hero; then the two
+ * paragraphs about the movement at full width.
  * Copy from the current ifollowthemoney.org About page.
  */
 export function AboutIntro() {
   return (
     <section aria-label="What we have achieved" className="bg-white">
       <Container className="py-16 sm:py-20 lg:max-w-[80rem] lg:py-24">
-        {/* Written word by word with GSAP each time it scrolls into view */}
-        <WriteOn
-          as="p"
+        {/* Written as you scroll, like the home page highlight */}
+        <ScrollStatement
           lang="en"
           className="[font-family:Cambria,Georgia,serif] text-[1.375rem]/[2.35rem] font-medium text-pretty text-black sm:text-[2rem]/[3.25rem] lg:text-[2.5rem]/[4rem]"
-          text={[
+          parts={[
             "Our team has tracked a total of ",
             { chip: "$13.5 million" },
             " in government projects in ",
