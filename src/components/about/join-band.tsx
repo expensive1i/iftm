@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
@@ -7,15 +8,22 @@ import { Container } from "@/components/ui/container";
  * page) over a fixed photo, like the home page's impact band. The bottom
  * padding leaves room for the footer's app card, which overlaps it.
  */
-const PHOTO = "/_next/image?url=%2Fimages%2Fabout-4.jpg&w=1920&q=70";
 
 export function JoinBand() {
   return (
     <section
       aria-labelledby="join-title"
-      className="relative isolate overflow-hidden bg-cover bg-[center_35%] text-white md:bg-fixed"
-      style={{ backgroundImage: `url(${PHOTO})` }}
+      className="relative isolate overflow-hidden text-white"
     >
+      {/* Photo held still while the page scrolls past it: the fixed layer
+          is clipped to this section by clip-path, so it acts like a
+          window. Served through next/image (default quality) so it loads
+          the same in production as in development. */}
+      <div aria-hidden className="absolute inset-0 -z-20 [clip-path:inset(0)]">
+        <div className="fixed inset-0">
+          <Image src="/images/about-4.jpg" alt="" fill sizes="100vw" className="object-cover object-[center_35%]" />
+        </div>
+      </div>
       <div
         aria-hidden
         className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgb(20_20_20/0.92)_0%,rgb(28_28_28/0.75)_45%,rgb(110_0_8/0.45)_100%)]"

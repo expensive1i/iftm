@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
@@ -11,16 +12,23 @@ import { Container } from "@/components/ui/container";
  * optimiser so a large original isn't sent to the browser.
  * iOS ignores fixed backgrounds, so on phones it simply scrolls.
  */
-const PHOTO = "/_next/image?url=%2Fimages%2Fbanner-home.jpeg&w=1920&q=70";
 
 export function ImpactBand() {
   return (
     <section
       aria-labelledby="impact-title"
-      className="relative isolate overflow-hidden bg-cover bg-[center_30%] text-white md:bg-fixed"
-      style={{ backgroundImage: `url(${PHOTO})` }}
+      className="relative isolate overflow-hidden text-white"
     >
       {/* Dark-to-deep-red wash so the text reads */}
+      {/* Photo held still while the page scrolls past it: the fixed layer
+          is clipped to this section by clip-path, so it acts like a
+          window. Served through next/image (default quality) so it loads
+          the same in production as in development. */}
+      <div aria-hidden className="absolute inset-0 -z-20 [clip-path:inset(0)]">
+        <div className="fixed inset-0">
+          <Image src="/images/banner-home.jpeg" alt="" fill sizes="100vw" className="object-cover object-[center_30%]" />
+        </div>
+      </div>
       <div
         aria-hidden
         className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgb(20_20_20/0.92)_0%,rgb(28_28_28/0.75)_45%,rgb(110_0_8/0.45)_100%)]"
