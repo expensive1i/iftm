@@ -109,7 +109,7 @@ export default function DownloadPage() {
           className="pointer-events-none absolute top-0 right-0 -z-10 size-[9rem] -rotate-90 opacity-60 sm:size-[20rem] sm:opacity-70"
         />
         <Container className="pt-16 pb-40 sm:pt-20 lg:max-w-[80rem] lg:pt-24 lg:pb-44">
-          <div className="max-w-2xl">
+          <div className="mx-auto max-w-3xl text-center">
             <p className="text-sm font-semibold tracking-[0.18em] text-primary uppercase">
               iFollowTheMoney app
             </p>
@@ -118,12 +118,12 @@ export default function DownloadPage() {
               className="mt-4 [font-family:Cambria,Georgia,serif] text-[2rem]/[2.5rem] font-medium text-balance text-black sm:text-[2.75rem]/[3.375rem]"
               text="Follow the money from your phone."
             />
-            <p className="mt-5 max-w-lg text-base/7 text-muted sm:text-lg/8">
+            <p className="mx-auto mt-5 max-w-xl text-base/7 text-muted sm:text-lg/8">
               Report on projects in your community, follow campaigns and share
               what you find. Available on Android now; the iOS app is coming
               soon.
             </p>
-            <StoreButtons className="mt-8" />
+            <StoreButtons className="mt-8 justify-center" />
             <p className="mt-6 text-sm text-muted">
               Prefer a computer?{" "}
               <Link
@@ -138,7 +138,7 @@ export default function DownloadPage() {
 
           {/* How to follow the money */}
           <div className="mt-16 sm:mt-20">
-            <h2 className="[font-family:Cambria,Georgia,serif] text-[1.625rem]/tight font-medium text-black sm:text-[2rem]/tight">
+            <h2 className="text-center [font-family:Cambria,Georgia,serif] text-[1.625rem]/tight font-medium text-black sm:text-[2rem]/tight">
               How to follow the money
             </h2>
             <ol className="mt-8 grid gap-px overflow-hidden rounded-[0.3125rem] border border-foreground/15 bg-foreground/15 sm:grid-cols-3">
