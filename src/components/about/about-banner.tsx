@@ -60,7 +60,7 @@ export function AboutBanner() {
             </div>
             <p
               lang="en"
-              className="text-justify text-[1.0625rem]/[1.85rem] hyphens-manual text-white/85 sm:text-lg/8"
+              className="max-w-md text-justify text-[0.875rem]/[1.6rem] hyphens-manual text-white/80 sm:text-[0.9375rem]/[1.7rem]"
             >
               {"A net­work of jour­nal­ists, data spe­cial­ists, com­mu­nity cham­pi­ons, " +
                 "an­a­lysts, legal prac­ti­tion­ers and citi­zens who pro­mote open " +

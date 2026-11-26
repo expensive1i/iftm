@@ -32,7 +32,7 @@ export function AboutIntro() {
           </p>
           <p lang="en" className="text-justify hyphens-manual">
             {
-              "iFol­low­The­Money is an online com­mu­nity for thou­sands of pas­sion­ate young people across Africa who are hold­ing their gov­ern­ment to ac­count­able stan­dards in order to ensure that the div­i­dends of de­moc­racy are achieved and public funds work for the good of the people. You too can be a part of the so­lu­tion in your com­mu­nity by joining our team of citizen eval­u­a­tors, and com­mu­nity cham­pi­ons at ifollowthemoney.org."
+              "iFol­low­The­Money is an online com­mu­nity for thou­sands of pas­sion­ate young people across Africa who are hold­ing their gov­ern­ment to ac­count­able stan­dards in order to ensure that the div­i­dends of de­moc­racy are achieved and public funds work for the good of the people. You too can be a part of the so­lu­tion in your com­mu­nity by joining our team of citizen eval­u­a­tors, and com­mu­nity cham­pi­ons at ifollow​the​money.org."
             }
           </p>
         </div>
