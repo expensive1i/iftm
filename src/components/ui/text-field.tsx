@@ -55,6 +55,8 @@ type FieldBase = {
   hint?: ReactNode;
   /** A control inside the right edge of the box, e.g. a show-password button. */
   trailing?: ReactNode;
+  /** A small icon inside the left edge of the box; it turns red on focus. */
+  leading?: ReactNode;
   className?: string;
 };
 
@@ -67,6 +69,7 @@ export function TextField({
   error,
   hint,
   trailing,
+  leading,
   className,
   id,
   required,
@@ -88,6 +91,7 @@ export function TextField({
             BOX,
             "h-14",
             trailing && "pr-12",
+            leading && "pl-11",
             error ? BOX_ERR : BOX_OK,
           )}
         />
@@ -96,6 +100,7 @@ export function TextField({
           className={cn(
             LABEL,
             "top-1/2 -translate-y-1/2",
+            leading && "left-9",
             FLOATED,
             error ? "text-primary" : "text-muted peer-focus:text-primary",
           )}
@@ -103,6 +108,17 @@ export function TextField({
           {label}
           {required && " *"}
         </label>
+        {leading && (
+          <span
+            aria-hidden
+            className={cn(
+              "pointer-events-none absolute inset-y-0 left-4 flex items-center transition-colors [&_svg]:size-[1.125rem]",
+              error ? "text-primary" : "text-muted peer-focus:text-primary",
+            )}
+          >
+            {leading}
+          </span>
+        )}
         {trailing && (
           <div className="absolute inset-y-0 right-2 flex items-center">
             {trailing}
@@ -178,15 +194,23 @@ const STRENGTH = ["Too short", "Weak", "Fair", "Good", "Strong"];
 const STRENGTH_COLOR = ["#d3000f", "#d3000f", "#eda100", "#1baf7a", "#16875f"];
 
 /**
- * A password field with a show/hide button. With `meter`, a four-step
- * strength bar shows under it while typing (for creating a password).
+ * A password field with a show/hide button and a "Caps Lock is on" note.
+ * With `meter`, a four-step strength bar shows under it while typing (for
+ * creating a password).
  */
 export function PasswordField({
   meter,
   value,
+  hint,
+  onKeyDown,
+  onKeyUp,
   ...props
 }: Omit<TextFieldProps, "type" | "trailing"> & { meter?: boolean }) {
   const [shown, setShown] = useState(false);
+  // Tell people when Caps Lock is on, a common cause of failed log-ins
+  const [caps, setCaps] = useState(false);
+  const watchCaps = (e: React.KeyboardEvent<HTMLInputElement>) =>
+    setCaps(e.getModifierState?.("CapsLock") ?? false);
   const pw = typeof value === "string" ? value : "";
   const score = strength(pw);
   return (
@@ -195,6 +219,21 @@ export function PasswordField({
         {...props}
         value={value}
         type={shown ? "text" : "password"}
+        onKeyDown={(e) => {
+          watchCaps(e);
+          onKeyDown?.(e);
+        }}
+        onKeyUp={(e) => {
+          watchCaps(e);
+          onKeyUp?.(e);
+        }}
+        hint={
+          caps ? (
+            <span className="font-medium text-[#b07800]">Caps Lock is on.</span>
+          ) : (
+            hint
+          )
+        }
         trailing={
           <button
             type="button"
