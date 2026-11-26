@@ -7,7 +7,8 @@ import { Container } from "@/components/ui/container";
 /*
  * About page banner: breadcrumb, title and a short intro on white (so the
  * transparent header stays readable), then a wide photo on the deep red
- * offset block used across the site, with a small "10+ years" card.
+ * offset block used across the site. (The numbers strip below it carries
+ * the "10+ years" figure, so the photo has no card of its own.)
  * Copy from the current ifollowthemoney.org About page.
  */
 export function AboutBanner() {
@@ -78,16 +79,6 @@ export function AboutBanner() {
               sizes="(min-width: 1280px) 78rem, 100vw"
               className="object-cover object-[60%_35%]"
             />
-          </div>
-
-          {/* Small figure card over the lower left of the photo */}
-          <div className="absolute bottom-0 left-4 rounded-[0.625rem] border border-foreground/10 bg-white px-5 py-4 shadow-[5px_6px_0_var(--foreground)] sm:left-8 sm:px-6 sm:py-5">
-            <p className="[font-family:Cambria,Georgia,serif] text-[2rem]/none font-medium text-black sm:text-[2.5rem]/none">
-              10+
-            </p>
-            <p className="mt-1.5 max-w-[12rem] text-[0.8125rem]/5 text-muted sm:text-sm">
-              years tracking public money and transparency
-            </p>
           </div>
         </div>
       </Container>
