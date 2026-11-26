@@ -5,10 +5,19 @@ import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
-const STEP_MS = 5500;
+const STEP_MS = 3500;
 
 // `crop` trims the corner of a photo that carries a printed credit mark.
+// The field photos (© CODE / KC Nwakalor) come from CODE's Flickr.
 const photos = [
+  {
+    src: "/images/community/bagega-well.jpg",
+    alt: "A woman drawing water from a well in Bagega, Zamfara",
+    pos: "72% 45%",
+    crop: true,
+    title: "Bagega, Zamfara",
+    text: "Where it began: the community whose children Follow The Money first campaigned for.",
+  },
   {
     src: "/images/about-2.jpg",
     alt: "A Follow The Money tracker talking with women in a community",
@@ -23,6 +32,22 @@ const photos = [
     pos: "35% 40%",
     title: "On the ground",
     text: "Every project is checked in person, not just on paper.",
+  },
+  {
+    src: "/images/community/zamfara-roofless-classroom.jpg",
+    alt: "A classroom in Zamfara with no roof, only the bare rafters",
+    pos: "50% 50%",
+    crop: true,
+    title: "A classroom with no roof",
+    text: "The kind of unfinished project trackers find, report and follow up.",
+  },
+  {
+    src: "/images/community/shikira-water-point.jpg",
+    alt: "Children fetching water with jerrycans at a water point in Shikira, Niger State",
+    pos: "30% 55%",
+    crop: true,
+    title: "Shikira, Niger State",
+    text: "Children fetching water: the everyday needs that public money is meant to meet.",
   },
   {
     src: "/images/about-1.jpg",
@@ -76,7 +101,7 @@ export function AboutPhotos() {
             key={p.src}
             aria-hidden={!on}
             className={cn(
-              "absolute inset-0 transition-opacity duration-1000 ease-out",
+              "absolute inset-0 transition-opacity duration-700 ease-out",
               on ? "opacity-100" : "opacity-0",
             )}
           >
@@ -86,7 +111,7 @@ export function AboutPhotos() {
               fill
               sizes="(min-width: 1024px) 34vw, 90vw"
               className={cn(
-                "object-cover transition-transform duration-[6500ms] ease-out",
+                "object-cover transition-transform duration-[4500ms] ease-out",
                 p.crop ? "origin-top-left" : "origin-center",
                 // Slow zoom while showing; the cropped photo never drops
                 // below the scale that hides its credit mark.
@@ -100,7 +125,7 @@ export function AboutPhotos() {
               <div
                 className={cn(
                   "transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
-                  on ? "translate-y-0 opacity-100 delay-500" : "translate-y-5 opacity-0",
+                  on ? "translate-y-0 opacity-100 delay-300" : "translate-y-5 opacity-0",
                 )}
               >
                 <p className="[font-family:Cambria,Georgia,serif] text-[1.375rem]/tight font-medium sm:text-[1.5rem]/tight">
