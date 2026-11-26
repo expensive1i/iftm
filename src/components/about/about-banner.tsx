@@ -25,12 +25,20 @@ export function AboutBanner() {
         />
         <div
           aria-hidden
-          className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgb(20_20_20/0.82)_0%,rgb(28_28_28/0.55)_55%,rgb(110_0_8/0.35)_100%)]"
+          className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgb(20_20_20/0.86)_0%,rgb(28_28_28/0.7)_55%,rgb(70_0_6/0.62)_100%)]"
         />
 
-        <Container className="pt-10 pb-14 sm:pt-14 sm:pb-16 lg:max-w-[80rem] lg:pt-16 lg:pb-20">
+        {/* Bottom edge fades softly into the white section below */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-20 bg-[linear-gradient(to_bottom,transparent,white)] sm:h-24"
+        />
+
+        {/* Extra bottom space keeps every line of text clear of the fade; a
+            soft shadow keeps it readable over any part of the photo. */}
+        <Container className="pt-10 pb-24 [text-shadow:0_1px_14px_rgb(0_0_0/0.45)] sm:pt-14 sm:pb-28 lg:max-w-[80rem] lg:pt-16 lg:pb-32">
           <nav aria-label="Breadcrumb">
-            <ol className="flex items-center gap-1.5 text-sm text-white/65">
+            <ol className="flex items-center gap-1.5 text-sm text-white/75">
               <li>
                 <Link href="/" className="transition-colors hover:text-white">
                   Home
@@ -47,7 +55,7 @@ export function AboutBanner() {
 
           <div className="mt-8 grid gap-6 lg:mt-10 lg:grid-cols-[1.5fr_1fr] lg:items-end lg:gap-16">
             <div>
-              <p className="text-sm font-semibold tracking-[0.18em] text-white/60 uppercase">
+              <p className="text-sm font-semibold tracking-[0.18em] text-white/70 uppercase">
                 About us
               </p>
               <h1
@@ -59,7 +67,7 @@ export function AboutBanner() {
             </div>
             <p
               lang="en"
-              className="text-[1.0625rem]/[1.85rem] text-justify hyphens-manual text-white/75 sm:text-lg/8"
+              className="text-[1.0625rem]/[1.85rem] text-justify hyphens-manual text-white/85 sm:text-lg/8"
             >
               {"A net­work of jour­nal­ists, data spe­cial­ists, com­mu­nity cham­pi­ons, " +
                 "an­a­lysts, legal prac­ti­tion­ers and citi­zens who pro­mote open " +
