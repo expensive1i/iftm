@@ -1,8 +1,8 @@
 import { Laptop } from "lucide-react";
 import Link from "next/link";
 
-import { GooglePlayIcon } from "@/components/brand/google-play-icon";
 import { OrbitDots } from "@/components/brand/orbit-dots";
+import { AppDownloadButton } from "@/components/sections/app-download-button";
 import { HeroGallery } from "@/components/sections/hero-gallery";
 import { RotatingHeadline } from "@/components/sections/rotating-headline";
 import { Container } from "@/components/ui/container";
@@ -85,16 +85,8 @@ export function Hero() {
             >
               Start a campaign
             </Link>
-            <Link
-              href={siteConfig.appUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-12 items-center justify-center whitespace-nowrap sm:h-14 rounded-[0.3125rem] btn-sweep btn-sweep-invert border border-foreground/25 bg-white gap-2.5 px-3 text-[0.9375rem] sm:px-7 sm:text-[1.0625rem] font-semibold text-foreground"
-            >
-              <GooglePlayIcon />
-              <span className="sm:hidden">Get the app</span>
-              <span className="hidden sm:inline">Download the app</span>
-            </Link>
+            {/* Apple logo on iPhone/iPad, Google Play everywhere else */}
+            <AppDownloadButton className="inline-flex h-12 items-center justify-center whitespace-nowrap sm:h-14 rounded-[0.3125rem] btn-sweep btn-sweep-invert border border-foreground/25 bg-white gap-2.5 px-3 text-[0.9375rem] sm:px-7 sm:text-[1.0625rem] font-semibold text-foreground" />
           </div>
         </div>
       </Container>
