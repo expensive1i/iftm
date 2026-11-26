@@ -194,6 +194,21 @@
   }
 }
 
+/* A gentle float, for illustrations (e.g. the not-found page). */
+@keyframes ftm-float {
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.ftm-float {
+  animation: ftm-float 4s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ftm-float {
+    animation: none;
+  }
+}
+
 /* Hero text rises in, one line after another. */
 @keyframes ftm-rise-in {
   from {

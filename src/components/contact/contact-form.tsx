@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, CircleCheck, Mail } from "lucide-react";
+import { ChevronRight, CircleCheck } from "lucide-react";
 import { useId, useState } from "react";
 
 import { siteConfig } from "@/config/site";
@@ -14,27 +14,123 @@ const topics = [
   "Help with the app",
 ] as const;
 
-type Field = "name" | "email" | "message";
+type Field = "first" | "last" | "email" | "message";
+
+/**
+ * A text field with a floating label: the label sits inside the box and
+ * moves up onto the border (in red) when the field is focused or filled.
+ * Focus is shown by the border alone, one colour, no glow.
+ */
+function FloatField({
+  id,
+  label,
+  value,
+  onChange,
+  onBlur,
+  error,
+  required,
+  type = "text",
+  autoComplete,
+  multiline,
+}: {
+  id: string;
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  onBlur?: () => void;
+  error?: string;
+  required?: boolean;
+  type?: string;
+  autoComplete?: string;
+  multiline?: boolean;
+}) {
+  const box = cn(
+    "peer block w-full rounded-[0.625rem] border-[1.5px] bg-white px-4 text-[0.9375rem] text-foreground outline-none transition-colors placeholder:text-transparent",
+    error
+      ? "border-primary"
+      : "border-foreground/20 hover:border-foreground/35 focus:border-primary",
+  );
+  const shared = {
+    id,
+    value,
+    placeholder: label,
+    required,
+    onBlur,
+    "aria-invalid": !!error,
+    "aria-describedby": error ? `${id}-err` : undefined,
+  };
+  return (
+    <div>
+      <div className="relative">
+        {multiline ? (
+          <textarea
+            {...shared}
+            rows={6}
+            maxLength={2000}
+            onChange={(e) => onChange(e.target.value)}
+            className={cn(box, "min-h-40 resize-y pt-5 pb-3 leading-7")}
+          />
+        ) : (
+          <input
+            {...shared}
+            type={type}
+            autoComplete={autoComplete}
+            onChange={(e) => onChange(e.target.value)}
+            className={cn(box, "h-14")}
+          />
+        )}
+        <label
+          htmlFor={id}
+          className={cn(
+            "pointer-events-none absolute left-3 bg-white px-1 text-[0.9375rem] transition-all duration-200",
+            multiline ? "top-[1.15rem]" : "top-1/2 -translate-y-1/2",
+            // Floated: on the border, smaller
+            "peer-focus:top-0 peer-focus:-translate-y-1/2 peer-focus:text-xs peer-focus:font-semibold",
+            "peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:-translate-y-1/2 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:font-semibold",
+            error ? "text-primary" : "text-muted peer-focus:text-primary",
+          )}
+        >
+          {label}
+          {required && " *"}
+        </label>
+      </div>
+      {error && (
+        <p
+          id={`${id}-err`}
+          className="mt-1.5 px-1 text-[0.8125rem] text-primary"
+        >
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
 
 /**
  * The contact form. There is no mail service behind the site yet, so on
  * "Send" it checks the fields, then opens the visitor's own email app with
  * the message written out to the team's address (subject and body filled
- * in). The form says so, and the address is shown to copy if no email app
- * opens. Swap `send` for a server action when a mail service is added.
+ * in). The form says so, and the address is shown if no email app opens.
+ * Swap `send` for a server action when a mail service is added.
  */
 export function ContactForm() {
   const uid = useId();
   const [topic, setTopic] = useState<(typeof topics)[number]>(topics[0]);
-  const [values, setValues] = useState({ name: "", email: "", message: "" });
+  const [values, setValues] = useState({
+    first: "",
+    last: "",
+    email: "",
+    message: "",
+  });
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
   const [sent, setSent] = useState(false);
 
   const id = (f: string) => `${uid}-${f}`;
+  const set = (f: Field) => (v: string) => setValues((s) => ({ ...s, [f]: v }));
 
   function validate() {
     const e: Partial<Record<Field, string>> = {};
-    if (!values.name.trim()) e.name = "Please add your name.";
+    if (!values.first.trim()) e.first = "Please add your first name.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim()))
       e.email = "Please add a valid email address.";
     if (values.message.trim().length < 10)
@@ -42,28 +138,29 @@ export function ContactForm() {
     setErrors(e);
     return e;
   }
+  const recheck = (f: Field) => () => {
+    if (errors[f]) validate();
+  };
 
   function send(ev: React.FormEvent) {
     ev.preventDefault();
     const e = validate();
-    const first = (Object.keys(e) as Field[])[0];
+    const first = (["first", "email", "message"] as Field[]).find((f) => e[f]);
     if (first) {
       document.getElementById(id(first))?.focus();
       return;
     }
-    const subject = `${topic}: message from ${values.name.trim()}`;
-    const body = `${values.message.trim()}\n\n—\n${values.name.trim()}\n${values.email.trim()}`;
+    const name = `${values.first.trim()} ${values.last.trim()}`.trim();
+    const subject = `${topic}: message from ${name}`;
+    const body = `${values.message.trim()}\n\n—\n${name}\n${values.email.trim()}`;
     window.location.href = `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setSent(true);
   }
 
-  const input =
-    "mt-2 block w-full rounded-[0.3125rem] border bg-white px-4 text-[0.9375rem] text-foreground outline-none transition-[border-color,box-shadow] placeholder:text-muted/70 focus:border-primary focus:shadow-[0_0_0_3px_rgb(211_0_15/0.15)]";
-
   if (sent) {
     return (
       <div
-        className="flex min-h-[26rem] flex-col items-start justify-center"
+        className="flex min-h-[24rem] flex-col items-start justify-center"
         role="status"
       >
         <span className="grid size-14 place-items-center rounded-full bg-[#e3f6ee] text-[#16875f]">
@@ -87,7 +184,7 @@ export function ContactForm() {
           type="button"
           onClick={() => {
             setSent(false);
-            setValues({ name: "", email: "", message: "" });
+            setValues({ first: "", last: "", email: "", message: "" });
           }}
           className="mt-6 text-sm font-semibold text-foreground underline underline-offset-4 hover:text-primary"
         >
@@ -98,7 +195,12 @@ export function ContactForm() {
   }
 
   return (
-    <form noValidate onSubmit={send} aria-describedby={id("how")}>
+    <form
+      noValidate
+      onSubmit={send}
+      aria-describedby={id("how")}
+      className="space-y-6"
+    >
       {/* Topic */}
       <fieldset>
         <legend className="text-sm font-semibold text-foreground">
@@ -109,7 +211,7 @@ export function ContactForm() {
             <label
               key={t}
               className={cn(
-                "cursor-pointer rounded-full border px-4 py-2 text-sm font-medium transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-primary/40",
+                "cursor-pointer rounded-full border-[1.5px] px-4 py-2 text-sm font-medium transition-colors has-[:focus-visible]:border-primary",
                 topic === t
                   ? "border-primary bg-primary text-white"
                   : "border-foreground/15 text-foreground hover:border-foreground/40",
@@ -129,104 +231,66 @@ export function ContactForm() {
         </div>
       </fieldset>
 
-      <div className="mt-7 grid gap-5 sm:grid-cols-2">
-        {(
-          [
-            ["name", "Your name", "text", "name", "Amina Bello"],
-            ["email", "Email address", "email", "email", "you@example.com"],
-          ] as const
-        ).map(([f, label, type, auto, ph]) => (
-          <div key={f}>
-            <label
-              htmlFor={id(f)}
-              className="text-sm font-semibold text-foreground"
-            >
-              {label}
-            </label>
-            <input
-              id={id(f)}
-              type={type}
-              autoComplete={auto}
-              placeholder={ph}
-              value={values[f]}
-              onChange={(e) =>
-                setValues((v) => ({ ...v, [f]: e.target.value }))
-              }
-              onBlur={() => errors[f] && validate()}
-              aria-invalid={!!errors[f]}
-              aria-describedby={errors[f] ? id(`${f}-err`) : undefined}
-              className={cn(
-                input,
-                "h-12",
-                errors[f] ? "border-primary" : "border-foreground/15",
-              )}
-            />
-            {errors[f] && (
-              <p
-                id={id(`${f}-err`)}
-                className="mt-1.5 text-[0.8125rem] text-primary"
-              >
-                {errors[f]}
-              </p>
-            )}
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-5">
-        <div className="flex items-baseline justify-between">
-          <label
-            htmlFor={id("message")}
-            className="text-sm font-semibold text-foreground"
-          >
-            Message
-          </label>
-          <span className="text-xs text-muted tabular-nums">
-            {values.message.length} / 2000
-          </span>
-        </div>
-        <textarea
-          id={id("message")}
-          rows={6}
-          maxLength={2000}
-          placeholder="Tell us what you need, or about the project you want to follow."
-          value={values.message}
-          onChange={(e) =>
-            setValues((v) => ({ ...v, message: e.target.value }))
-          }
-          onBlur={() => errors.message && validate()}
-          aria-invalid={!!errors.message}
-          aria-describedby={errors.message ? id("message-err") : undefined}
-          className={cn(
-            input,
-            "resize-y py-3 leading-7",
-            errors.message ? "border-primary" : "border-foreground/15",
-          )}
+      <div className="grid gap-6 sm:grid-cols-2 sm:gap-5">
+        <FloatField
+          id={id("first")}
+          label="First name"
+          required
+          autoComplete="given-name"
+          value={values.first}
+          onChange={set("first")}
+          onBlur={recheck("first")}
+          error={errors.first}
         />
-        {errors.message && (
-          <p
-            id={id("message-err")}
-            className="mt-1.5 text-[0.8125rem] text-primary"
-          >
-            {errors.message}
-          </p>
-        )}
+        <FloatField
+          id={id("last")}
+          label="Last name"
+          autoComplete="family-name"
+          value={values.last}
+          onChange={set("last")}
+        />
+      </div>
+      <FloatField
+        id={id("email")}
+        label="Email address"
+        type="email"
+        required
+        autoComplete="email"
+        value={values.email}
+        onChange={set("email")}
+        onBlur={recheck("email")}
+        error={errors.email}
+      />
+      <div>
+        <FloatField
+          id={id("message")}
+          label="Your message"
+          multiline
+          required
+          value={values.message}
+          onChange={set("message")}
+          onBlur={recheck("message")}
+          error={errors.message}
+        />
+        <p className="mt-1.5 px-1 text-right text-xs text-muted tabular-nums">
+          {values.message.length} / 2000
+        </p>
       </div>
 
-      <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <p
-          id={id("how")}
-          className="flex items-start gap-2 text-[0.8125rem]/5 text-muted sm:max-w-xs"
-        >
-          <Mail aria-hidden className="mt-0.5 size-4 shrink-0" />
+      {/* The note runs the full width; the button sits on its own line */}
+      <div className="space-y-5 pt-1">
+        <p id={id("how")} className="text-[0.875rem]/6 text-muted">
           Sending opens your email app with this message ready to go to{" "}
-          {siteConfig.email}.
+          <span className="font-semibold text-foreground">
+            {siteConfig.email}
+          </span>
+          .
         </p>
         <button
           type="submit"
-          className="btn-sweep inline-flex h-13 shrink-0 items-center justify-center gap-2 rounded-[0.3125rem] bg-primary px-7 text-base font-semibold text-primary-foreground"
+          className="btn-sweep inline-flex h-13 w-full items-center justify-center gap-1.5 rounded-[0.3125rem] bg-primary pr-5 pl-7 text-base font-semibold text-primary-foreground sm:w-auto"
         >
-          Send message <ArrowRight aria-hidden className="size-4" />
+          Send message <ChevronRight aria-hidden className="size-5" />
         </button>
       </div>
     </form>
