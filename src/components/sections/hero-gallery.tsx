@@ -16,15 +16,22 @@ import { cn } from "@/lib/utils";
  * through them. A few red diamonds break out just past the edge.
  */
 
-// `position` keeps each subject's face inside a small diamond.
+// Community fieldwork from Connected Development's Flickr (S-TRACE visits
+// in Sokoto, health centre checks, a school visit in Abuja).
+// © CODE / Peace Ita. `position` keeps the people inside a small diamond.
 const photos = [
-  { src: "/images/about-2.jpg", position: "60% 25%" },
-  { src: "/images/banner-about.jpg", position: "75% 30%" },
-  { src: "/images/about-1.jpg", position: "72% 30%" },
-  { src: "/images/banner-home.jpeg", position: "50% 30%" },
-  { src: "/images/about-3.jpg", position: "35% 40%" },
-  { src: "/images/about-4.jpg", position: "58% 38%" },
-  { src: "/images/campaign-kakulu.jpg", position: "45% 55%" },
+  { src: "/images/community/school-classroom.jpg", position: "42% 40%" },
+  { src: "/images/community/phc-schedule-check.jpg", position: "35% 45%" },
+  { src: "/images/community/tracker-field.jpg", position: "50% 30%" },
+  { src: "/images/community/community-meeting.jpg", position: "45% 50%" },
+  { src: "/images/community/phc-conversation.jpg", position: "35% 40%" },
+  { src: "/images/community/school-visit-team.jpg", position: "55% 55%" },
+  { src: "/images/community/community-volunteers.jpg", position: "50% 35%" },
+  { src: "/images/community/phc-entrance.jpg", position: "40% 45%" },
+  { src: "/images/community/community-session.jpg", position: "50% 50%" },
+  { src: "/images/community/phc-dagawa.jpg", position: "50% 55%" },
+  { src: "/images/community/school-visit-walk.jpg", position: "50% 40%" },
+  { src: "/images/community/bhcpf-sign.jpg", position: "50% 50%" },
 ];
 
 const MIN_N = 13; // smallest lattice; it grows to cover wider screens
