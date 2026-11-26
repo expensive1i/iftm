@@ -5,83 +5,106 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 
 /*
- * About page banner: breadcrumb, title and a short intro on white (so the
- * transparent header stays readable), then a wide photo on the deep red
- * offset block used across the site. (The numbers strip below it carries
- * the "10+ years" figure, so the photo has no card of its own.)
+ * About page banner. A page-title band with a photo behind it (darkened so
+ * the white breadcrumb and title read), then, on white, the wide photo on
+ * the deep red offset block used across the site.
  * Copy from the current ifollowthemoney.org About page.
  */
 export function AboutBanner() {
   return (
-    <section aria-labelledby="about-page-title" className="relative isolate overflow-hidden bg-white">
-      {/* Brand quarter gears in the top corners */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/brand/corner-gear.svg"
-        alt=""
-        aria-hidden
-        className="pointer-events-none absolute top-0 left-0 -z-10 size-[9rem] rotate-180 opacity-60 sm:size-[20rem] sm:opacity-70"
-      />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/brand/corner-gear.svg"
-        alt=""
-        aria-hidden
-        className="pointer-events-none absolute top-0 right-0 -z-10 size-[9rem] -rotate-90 opacity-60 sm:size-[20rem] sm:opacity-70"
-      />
+    <section aria-labelledby="about-page-title">
+      {/* ── Title band with a photo background ───────────────── */}
+      <div className="relative isolate overflow-hidden text-white">
+        <Image
+          src="/images/community/delta-village-walk.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="-z-20 origin-top-left scale-[1.12] object-cover object-[center_55%]"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgb(20_20_20/0.82)_0%,rgb(28_28_28/0.55)_55%,rgb(110_0_8/0.35)_100%)]"
+        />
 
-      <Container className="pt-10 pb-16 sm:pt-14 sm:pb-20 lg:max-w-[80rem] lg:pt-16">
-        <nav aria-label="Breadcrumb">
-          <ol className="flex items-center gap-1.5 text-sm text-muted">
-            <li>
-              <Link href="/" className="transition-colors hover:text-primary">
-                Home
-              </Link>
-            </li>
-            <li aria-hidden>
-              <ChevronRight className="size-3.5" />
-            </li>
-            <li aria-current="page" className="font-medium text-foreground">
-              About
-            </li>
-          </ol>
-        </nav>
+        <Container className="pt-10 pb-14 sm:pt-14 sm:pb-16 lg:max-w-[80rem] lg:pt-16 lg:pb-20">
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-1.5 text-sm text-white/65">
+              <li>
+                <Link href="/" className="transition-colors hover:text-white">
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden>
+                <ChevronRight className="size-3.5" />
+              </li>
+              <li aria-current="page" className="font-medium text-white">
+                About
+              </li>
+            </ol>
+          </nav>
 
-        <div className="mt-8 grid gap-6 lg:mt-10 lg:grid-cols-[1.5fr_1fr] lg:items-end lg:gap-16">
-          <div>
-            <p className="text-sm font-semibold tracking-[0.18em] text-primary uppercase">About us</p>
-            <h1
-              id="about-page-title"
-              className="mt-4 [font-family:Cambria,Georgia,serif] text-[2.5rem]/[3rem] font-medium text-balance text-black sm:text-[3rem]/[3.625rem] lg:text-[3.25rem]/[3.875rem]"
+          <div className="mt-8 grid gap-6 lg:mt-10 lg:grid-cols-[1.5fr_1fr] lg:items-end lg:gap-16">
+            <div>
+              <p className="text-sm font-semibold tracking-[0.18em] text-white/60 uppercase">
+                About us
+              </p>
+              <h1
+                id="about-page-title"
+                className="mt-4 [font-family:Cambria,Georgia,serif] text-[2.5rem]/[3rem] font-medium text-balance sm:text-[3rem]/[3.625rem] lg:text-[3.25rem]/[3.875rem]"
+              >
+                Africa’s largest citizen‑led accountability movement.
+              </h1>
+            </div>
+            <p
+              lang="en"
+              className="text-[1.0625rem]/[1.85rem] text-justify hyphens-manual text-white/75 sm:text-lg/8"
             >
-              Africa’s largest citizen‑led accountability movement.
-            </h1>
+              {"A net­work of jour­nal­ists, data spe­cial­ists, com­mu­nity cham­pi­ons, " +
+                "an­a­lysts, legal prac­ti­tion­ers and citi­zens who pro­mote open " +
+                "data and trans­par­ent gov­ern­ment."}
+            </p>
           </div>
-          <p lang="en" className="text-[1.0625rem]/[1.85rem] text-justify hyphens-manual text-muted sm:text-lg/8">
-            {"A net­work of jour­nal­ists, data spe­cial­ists, com­mu­nity cham­pi­ons, " +
-              "an­a­lysts, legal prac­ti­tion­ers and citi­zens who pro­mote open " +
-              "data and trans­par­ent gov­ern­ment."}
-          </p>
-        </div>
+        </Container>
+      </div>
 
-        {/* Wide photo on the offset block */}
-        <div className="relative mt-12 pr-3 pb-4 sm:mt-14 sm:pr-4 sm:pb-5">
-          <div
-            aria-hidden
-            className="absolute inset-0 top-4 left-3 -z-10 rounded-[1rem] bg-primary-deep sm:top-5 sm:left-4"
-          />
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[1rem] bg-surface-muted sm:aspect-[16/7] lg:aspect-[21/8]">
-            <Image
-              src="/images/banner-about.jpg"
-              alt="Follow The Money trackers with members of a community"
-              fill
-              priority
-              sizes="(min-width: 1280px) 78rem, 100vw"
-              className="object-cover object-[60%_35%]"
+      {/* ── Wide photo on the offset block ───────────────────── */}
+      <div className="relative isolate overflow-hidden bg-white">
+        {/* Brand quarter gears in the top corners */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/brand/corner-gear.svg"
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute top-0 left-0 -z-10 size-[9rem] rotate-180 opacity-60 sm:size-[20rem] sm:opacity-70"
+        />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/brand/corner-gear.svg"
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute top-0 right-0 -z-10 size-[9rem] -rotate-90 opacity-60 sm:size-[20rem] sm:opacity-70"
+        />
+
+        <Container className="py-12 sm:py-16 lg:max-w-[80rem] lg:py-20">
+          <div className="relative pr-3 pb-4 sm:pr-4 sm:pb-5">
+            <div
+              aria-hidden
+              className="absolute inset-0 top-4 left-3 -z-10 rounded-[1rem] bg-primary-deep sm:top-5 sm:left-4"
             />
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[1rem] bg-surface-muted sm:aspect-[16/7] lg:aspect-[21/8]">
+              <Image
+                src="/images/banner-about.jpg"
+                alt="Follow The Money trackers with members of a community"
+                fill
+                sizes="(min-width: 1280px) 78rem, 100vw"
+                className="object-cover object-[60%_35%]"
+              />
+            </div>
           </div>
-        </div>
-      </Container>
+        </Container>
+      </div>
     </section>
   );
 }
