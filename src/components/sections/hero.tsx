@@ -21,7 +21,7 @@ import { siteConfig } from "@/config/site";
 const headlines = [
   "Make public funds work for the public.",
   "Follow the money behind every school.",
-  "Every promised road should be built.",
+  "Every promised road should be constructed.",
   "Track the aid meant for your community.",
   "Hold every budget line to account.",
 ];
