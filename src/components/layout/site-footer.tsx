@@ -1,4 +1,5 @@
 import { Mail, MapPin } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 import { FooterAppCard } from "@/components/layout/footer-app-card";
@@ -25,14 +26,15 @@ export function SiteFooter() {
 
       {/* Top row: logo on the left, social icons on the right */}
       <Container className="flex items-center justify-between gap-6 border-b border-white/10 pt-14 pb-10 lg:max-w-[88rem]">
-        <Link href="/" className="inline-flex items-center gap-3">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/motif-gear-red.svg" alt="" className="size-11" />
-          <span className="text-lg/5 font-semibold text-white">
-            Follow
-            <br />
-            The Money
-          </span>
+        {/* Official white logo for dark backgrounds */}
+        <Link href="/" className="inline-flex shrink-0">
+          <Image
+            src="/brand/ftm-logo-white.png"
+            alt={siteConfig.name}
+            width={2442}
+            height={814}
+            className="h-11 w-auto sm:h-12"
+          />
         </Link>
         <SocialIcons className="gap-5 text-white [&_a]:opacity-70 [&_svg]:size-5" />
       </Container>

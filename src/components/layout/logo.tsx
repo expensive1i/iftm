@@ -14,10 +14,10 @@ export function Logo({ className }: { className?: string }) {
       )}
     >
       <Image
-        src="/brand/logo.webp"
+        src="/brand/ftm-logo.png"
         alt={siteConfig.name}
-        width={842}
-        height={286}
+        width={2442}
+        height={814}
         priority
         className="h-12 w-auto lg:h-[3.75rem]"
       />

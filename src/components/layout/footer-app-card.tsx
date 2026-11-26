@@ -106,7 +106,7 @@ function AppCollage() {
               >
                 {centre ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src="/brand/motif-gear-red.svg" alt="" className="size-[62%] brightness-0 invert" />
+                  <img src="/brand/ftm-mark.png" alt="" className="size-[62%] object-contain brightness-0 invert" />
                 ) : (
                   <Image
                     src={p.src}

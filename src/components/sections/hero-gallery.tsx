@@ -240,10 +240,10 @@ export function HeroGallery({
               }
             >
               {kind === "hidden" || red ? null : i === logo ? (
-                // The vector gear mark, as large as fits upright in the diamond.
+                // The official logo mark, as large as fits upright in the diamond.
                 <div className="absolute inset-[15%] -rotate-45">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/brand/motif-gear-red.svg" alt="" className="size-full" />
+                  <img src="/brand/ftm-mark.png" alt="" className="size-full object-contain" />
                 </div>
               ) : photo === undefined ? null : (
                 <div className="absolute inset-[-21%] -rotate-45">
