@@ -19,7 +19,8 @@ import path from "node:path";
 import sharp from "sharp";
 
 const ROOT = path.resolve("public");
-const SKIP = [/[\\/]brand[\\/]/, /[\\/]flags[\\/]/]; // logos and flags stay as they are
+// Logos, flags and the transparent cut-outs stay as they are
+const SKIP = [/[\\/]brand[\\/]/, /[\\/]flags[\\/]/, /[\\/]cutouts[\\/]/];
 const MAX_WIDTH = 2000;
 const QUALITY = 78;
 const dry = process.argv.includes("--dry");

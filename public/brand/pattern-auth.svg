@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180" fill="none" stroke="#1c1c1c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Coin -->
+  <g transform="translate(18 20)"><ellipse cx="11" cy="6" rx="11" ry="4"/><path d="M0 6v5a11 4 0 0 0 22 0V6"/></g>
+  <!-- Map pin -->
+  <g transform="translate(80 14)"><path d="M9 24s-9-8-9-14a9 9 0 0 1 18 0c0 6-9 14-9 14Z"/><circle cx="9" cy="10" r="3"/></g>
+  <!-- Megaphone -->
+  <g transform="translate(138 22)"><path d="M2 8h4l12-6v20L6 16H2Z"/><path d="M6 16l2 7h3"/></g>
+  <!-- Bar chart -->
+  <g transform="translate(20 84)"><path d="M0 0v22h24"/><path d="M6 22v-8M12 22V8M18 22v-12"/></g>
+  <!-- Magnifier -->
+  <g transform="translate(84 88)"><circle cx="9" cy="9" r="8"/><path d="M15 15l7 7"/></g>
+  <!-- Document -->
+  <g transform="translate(140 82)"><path d="M0 0h13l6 6v18H0Z"/><path d="M13 0v6h6M4 12h11M4 17h8"/></g>
+  <!-- School -->
+  <g transform="translate(16 142)"><path d="M0 22V10l12-8 12 8v12"/><path d="M9 22v-6h6v6"/></g>
+  <!-- Water drop -->
+  <g transform="translate(88 140)"><path d="M8 0s8 9 8 15a8 8 0 0 1-16 0C0 9 8 0 8 0Z"/></g>
+  <!-- Gear -->
+  <g transform="translate(140 142)"><circle cx="10" cy="10" r="4"/><path d="M10 0v3M10 17v3M0 10h3M17 10h3M3 3l2 2M15 15l2 2M17 3l-2 2M5 15l-2 2"/></g>
+</svg>

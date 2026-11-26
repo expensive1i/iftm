@@ -3,6 +3,7 @@
 import { ChevronRight, CircleCheck } from "lucide-react";
 import { useId, useState } from "react";
 
+import { TextAreaField, TextField } from "@/components/ui/text-field";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
@@ -15,96 +16,6 @@ const topics = [
 ] as const;
 
 type Field = "first" | "last" | "email" | "message";
-
-/**
- * A text field with a floating label: the label sits inside the box and
- * moves up onto the border (in red) when the field is focused or filled.
- * Focus is shown by the border alone, one colour, no glow.
- */
-function FloatField({
-  id,
-  label,
-  value,
-  onChange,
-  onBlur,
-  error,
-  required,
-  type = "text",
-  autoComplete,
-  multiline,
-}: {
-  id: string;
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  onBlur?: () => void;
-  error?: string;
-  required?: boolean;
-  type?: string;
-  autoComplete?: string;
-  multiline?: boolean;
-}) {
-  const box = cn(
-    "peer block w-full rounded-[0.625rem] border-[1.5px] bg-white px-4 text-[0.9375rem] text-foreground outline-none transition-colors placeholder:text-transparent",
-    error
-      ? "border-primary"
-      : "border-foreground/20 hover:border-foreground/35 focus:border-primary",
-  );
-  const shared = {
-    id,
-    value,
-    placeholder: label,
-    required,
-    onBlur,
-    "aria-invalid": !!error,
-    "aria-describedby": error ? `${id}-err` : undefined,
-  };
-  return (
-    <div>
-      <div className="relative">
-        {multiline ? (
-          <textarea
-            {...shared}
-            rows={6}
-            maxLength={2000}
-            onChange={(e) => onChange(e.target.value)}
-            className={cn(box, "min-h-40 resize-y pt-5 pb-3 leading-7")}
-          />
-        ) : (
-          <input
-            {...shared}
-            type={type}
-            autoComplete={autoComplete}
-            onChange={(e) => onChange(e.target.value)}
-            className={cn(box, "h-14")}
-          />
-        )}
-        <label
-          htmlFor={id}
-          className={cn(
-            "pointer-events-none absolute left-3 bg-white px-1 text-[0.9375rem] transition-all duration-200",
-            multiline ? "top-[1.15rem]" : "top-1/2 -translate-y-1/2",
-            // Floated: on the border, smaller
-            "peer-focus:top-0 peer-focus:-translate-y-1/2 peer-focus:text-xs peer-focus:font-semibold",
-            "peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:-translate-y-1/2 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:font-semibold",
-            error ? "text-primary" : "text-muted peer-focus:text-primary",
-          )}
-        >
-          {label}
-          {required && " *"}
-        </label>
-      </div>
-      {error && (
-        <p
-          id={`${id}-err`}
-          className="mt-1.5 px-1 text-[0.8125rem] text-primary"
-        >
-          {error}
-        </p>
-      )}
-    </div>
-  );
-}
 
 /**
  * The contact form. There is no mail service behind the site yet, so on
@@ -126,7 +37,10 @@ export function ContactForm() {
   const [sent, setSent] = useState(false);
 
   const id = (f: string) => `${uid}-${f}`;
-  const set = (f: Field) => (v: string) => setValues((s) => ({ ...s, [f]: v }));
+  const set =
+    (f: Field) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setValues((s) => ({ ...s, [f]: e.target.value }));
 
   function validate() {
     const e: Partial<Record<Field, string>> = {};
@@ -232,7 +146,7 @@ export function ContactForm() {
       </fieldset>
 
       <div className="grid gap-6 sm:grid-cols-2 sm:gap-5">
-        <FloatField
+        <TextField
           id={id("first")}
           label="First name"
           required
@@ -242,7 +156,7 @@ export function ContactForm() {
           onBlur={recheck("first")}
           error={errors.first}
         />
-        <FloatField
+        <TextField
           id={id("last")}
           label="Last name"
           autoComplete="family-name"
@@ -250,7 +164,7 @@ export function ContactForm() {
           onChange={set("last")}
         />
       </div>
-      <FloatField
+      <TextField
         id={id("email")}
         label="Email address"
         type="email"
@@ -262,10 +176,10 @@ export function ContactForm() {
         error={errors.email}
       />
       <div>
-        <FloatField
+        <TextAreaField
           id={id("message")}
           label="Your message"
-          multiline
+          maxLength={2000}
           required
           value={values.message}
           onChange={set("message")}
