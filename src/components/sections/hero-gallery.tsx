@@ -18,37 +18,51 @@ import { cn } from "@/lib/utils";
 
 // Community fieldwork from Connected Development's Flickr (© CODE, many by
 // KC Nwakalor): one or two photos from each of many events (Zamfara,
-// Bagega, Niger, Shikira, Delta, Bauchi, Kano, Kaduna, Sokoto, Abuja) so
+// Bagega, Niger, Shikira, Delta, Bauchi, Kano, Kaduna, Sokoto, Abuja, Jos,
+// Lagos, Port Harcourt) so
 // the collage never repeats a scene. Ordered so neighbours come from
 // different events. Every photo appears in at most one diamond at a time
 // (see HeroGallery). `position` keeps the people inside a small diamond.
 const photos = [
   { src: "/images/community/zamfara-roofless-classroom.jpg", position: "50% 50%" },
   { src: "/images/community/bagega-well.jpg", position: "70% 45%" },
+  { src: "/images/community/kuchingoro-graduates.jpg", position: "45% 45%" },
   { src: "/images/community/bauchi-community-meeting.jpg", position: "50% 55%" },
   { src: "/images/community/shikira-water-point.jpg", position: "30% 55%" },
+  { src: "/images/community/soot-march-placard.jpg", position: "45% 50%" },
   { src: "/images/community/delta-village-walk.jpg", position: "45% 55%" },
   { src: "/images/community/niger-site-workers.jpg", position: "65% 45%" },
+  { src: "/images/community/bauchi-tirum-schoolgirls.jpg", position: "50% 45%" },
   { src: "/images/community/school-classroom.jpg", position: "42% 40%" },
   { src: "/images/community/kano-tracker.jpg", position: "45% 40%" },
+  { src: "/images/community/jos-tracker-interview.jpg", position: "55% 45%" },
   { src: "/images/community/bauchi-schoolgirls.jpg", position: "50% 45%" },
   { src: "/images/community/village-women.jpg", position: "40% 40%" },
+  { src: "/images/community/lagos-girl-running.jpg", position: "45% 55%" },
   { src: "/images/community/sokoto-leaders-meeting.jpg", position: "50% 55%" },
   { src: "/images/community/bagega-girl.jpg", position: "50% 40%" },
+  { src: "/images/community/march-placards.jpg", position: "50% 45%" },
   { src: "/images/community/phc-schedule-check.jpg", position: "35% 45%" },
   { src: "/images/community/zamfara-schoolchildren.jpg", position: "50% 60%" },
+  { src: "/images/community/delta-school-students.jpg", position: "50% 50%" },
   { src: "/images/community/monitoring-team-training.jpg", position: "45% 45%" },
   { src: "/images/community/delta-elder.jpg", position: "50% 45%" },
+  { src: "/images/community/bauchi-zaki-student.jpg", position: "55% 45%" },
   { src: "/images/community/niger-site-visit.jpg", position: "55% 55%" },
   { src: "/images/community/bauchi-officer-interview.jpg", position: "50% 40%" },
+  { src: "/images/community/jos-community-group.jpg", position: "50% 55%" },
   { src: "/images/community/shikira-portrait.jpg", position: "50% 40%" },
   { src: "/images/community/site-inspection-elders.jpg", position: "40% 45%" },
+  { src: "/images/community/soot-march-protester.jpg", position: "45% 35%" },
   { src: "/images/community/tracker-field.jpg", position: "50% 30%" },
   { src: "/images/community/kaduna-advocates-meeting.jpg", position: "50% 45%" },
+  { src: "/images/community/lagos-tracker-resident.jpg", position: "45% 40%" },
   { src: "/images/community/abuja-school-visit.jpg", position: "55% 55%" },
   { src: "/images/community/bauchi-women-talk.jpg", position: "40% 35%" },
+  { src: "/images/community/kuchingoro-schoolgirls.jpg", position: "45% 60%" },
   { src: "/images/community/kano-young-trackers.jpg", position: "50% 35%" },
   { src: "/images/community/sokoto-community-meeting.jpg", position: "50% 55%" },
+  { src: "/images/community/march-wall.jpg", position: "40% 55%" },
   { src: "/images/community/monitoring-training-notes.jpg", position: "45% 40%" },
   { src: "/images/community/abuja-health-dialogue.jpg", position: "40% 50%" },
 ];
