@@ -137,11 +137,12 @@ export function AuthShowcase() {
             sizes="(min-width: 1024px) 45vw, 0px"
             priority={k === 0}
             className={cn(
-              "absolute inset-y-0 h-full object-contain drop-shadow-[0_24px_30px_rgb(110_0_8/0.25)] transition-[opacity,transform] duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
+              "absolute inset-y-0 h-full object-contain drop-shadow-[0_18px_24px_rgb(110_0_8/0.12)] transition-[opacity,transform] duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
               "align" in s && s.align
                 ? s.align
                 : "inset-x-0 w-full object-[right_bottom]",
-              k === i ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0",
+              // Kept a touch soft so the photos sit back in the panel
+              k === i ? "translate-y-0 opacity-[0.82]" : "translate-y-6 opacity-0",
             )}
           />
         ))}
