@@ -1,4 +1,3 @@
-import { siteConfig } from "@/config/site";
 import type { Language, MainNavItem, NavGroup } from "@/types";
 
 // Every page from the current ifollowthemoney.org menu, regrouped so the
@@ -27,8 +26,7 @@ export const mainNav: MainNavItem[] = [
       },
       {
         title: "Download the app",
-        href: siteConfig.appUrl,
-        external: true,
+        href: "/download",
         description: "Track and report projects from your phone.",
       },
     ],

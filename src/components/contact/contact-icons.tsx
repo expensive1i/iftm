@@ -122,3 +122,82 @@ export function PeopleIcon(props: SVGProps<SVGSVGElement>) {
     </Icon>
   );
 }
+
+/** An envelope with a red heart seal: email. */
+export function EmailIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icon {...props}>
+      <rect
+        x="6"
+        y="12"
+        width="36"
+        height="25"
+        rx="3.5"
+        fill="#fff"
+        {...line}
+      />
+      <path d="M7 14l17 13 17-13" fill={P} {...line} />
+      <path d="M7 36l12-11M41 36L29 25" {...line} strokeWidth={1.75} />
+      <circle cx="24" cy="27" r="5.5" fill={R} stroke={K} strokeWidth={1.75} />
+      <path
+        d="M24 29.6l-2.4-2.3a1.4 1.4 0 0 1 2-2l.4.4.4-.4a1.4 1.4 0 0 1 2 2Z"
+        fill="#fff"
+      />
+    </Icon>
+  );
+}
+
+/** A handset with signal arcs: phone. */
+export function CallIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icon {...props}>
+      <path
+        d="M13 7h6l3 8-4 3a20 20 0 0 0 12 12l3-4 8 3v6a4 4 0 0 1-4 4C21 39 9 27 9 11a4 4 0 0 1 4-4Z"
+        fill={P}
+        {...line}
+      />
+      <path d="M13 7h6l3 8-4 3" fill={R} {...line} />
+      <path
+        d="M28 6a14 14 0 0 1 14 14M28 12a8 8 0 0 1 8 8"
+        stroke={R}
+        strokeWidth={2.25}
+        strokeLinecap="round"
+      />
+    </Icon>
+  );
+}
+
+/** A map pin over a small building: the office. */
+export function OfficeIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icon {...props}>
+      <path d="M8 41h32" {...line} />
+      <path d="M12 41V24h14v17" fill="#fff" {...line} />
+      <path
+        d="M16 29h2M20 29h2M16 34h2M20 34h2"
+        stroke={K}
+        strokeWidth={2}
+        strokeLinecap="round"
+      />
+      <path d="M26 41V30h10v11" fill={P} {...line} />
+      <path
+        d="M34 22s-7-6.4-7-11.4a7 7 0 0 1 14 0c0 5-7 11.4-7 11.4Z"
+        fill={R}
+        {...line}
+      />
+      <circle cx="34" cy="10.6" r="2.4" fill="#fff" />
+    </Icon>
+  );
+}
+
+/** Three linked nodes, one red: follow the work online. */
+export function SocialIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icon {...props}>
+      <path d="M17 22l14-8M17 26l14 8" {...line} />
+      <circle cx="13" cy="24" r="6.5" fill={R} {...line} />
+      <circle cx="35" cy="12" r="5.5" fill="#fff" {...line} />
+      <circle cx="35" cy="36" r="5.5" fill={P} {...line} />
+    </Icon>
+  );
+}

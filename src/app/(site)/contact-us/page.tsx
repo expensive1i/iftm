@@ -14,7 +14,6 @@ import {
 } from "@/components/contact/contact-icons";
 import { Container } from "@/components/ui/container";
 import { WriteOn } from "@/components/ui/write-on";
-import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Contact us",
@@ -34,8 +33,7 @@ const shortcuts = [
     icon: AppIcon,
     title: "Get the app",
     text: "Report and follow from your phone.",
-    href: siteConfig.appUrl,
-    external: true,
+    href: "/download",
   },
   {
     icon: AnalyticsIcon,
@@ -132,7 +130,7 @@ export default function ContactPage() {
               Looking for something else?
             </p>
             <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
-              {shortcuts.map(({ icon: Icon, title, text, href, external }) => {
+              {shortcuts.map(({ icon: Icon, title, text, href }) => {
                 const inner = (
                   <>
                     <Icon className="size-12 shrink-0" />
@@ -154,20 +152,9 @@ export default function ContactPage() {
                   "group flex h-full items-center gap-4 rounded-[0.3125rem] border border-foreground/15 bg-white p-4 transition-colors hover:border-primary";
                 return (
                   <li key={title}>
-                    {external ? (
-                      <a
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={cls}
-                      >
-                        {inner}
-                      </a>
-                    ) : (
-                      <Link href={href} className={cls}>
-                        {inner}
-                      </Link>
-                    )}
+                    <Link href={href} className={cls}>
+                      {inner}
+                    </Link>
                   </li>
                 );
               })}

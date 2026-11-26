@@ -8,6 +8,9 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   appUrl:
     "https://play.google.com/store/apps/details?id=com.followthemoney.app",
+  // No App Store listing yet: set this to the listing URL when the iOS
+  // app is published and every App Store button switches on.
+  iosAppUrl: null as string | null,
   email: "hello@ifollowthemoney.org",
   // From the current ifollowthemoney.org Contact page
   phone: "+234 (09) 291 7545",
