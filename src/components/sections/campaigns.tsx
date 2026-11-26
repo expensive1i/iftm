@@ -1,6 +1,7 @@
 import { CampaignCard } from "@/components/sections/campaign-card";
 import { CampaignSlider } from "@/components/sections/campaign-slider";
 import { Container } from "@/components/ui/container";
+import { WriteOn } from "@/components/ui/write-on";
 import { campaigns } from "@/config/campaigns";
 
 /**
@@ -22,12 +23,11 @@ export function Campaigns() {
               <p className="text-sm font-semibold tracking-[0.18em] text-primary uppercase">
                 Campaigns
               </p>
-              <h2
+              <WriteOn
                 id="campaigns-title"
                 className="mt-4 max-w-[22ch] [font-family:Cambria,Georgia,serif] text-[2.25rem]/[2.75rem] font-medium text-balance text-black sm:text-[2.75rem]/[3.375rem] lg:text-[3.25rem]/[3.875rem]"
-              >
-                Citizens asking where the money went.
-              </h2>
+                text="Citizens asking where the money went."
+              />
             </>
           }
         >

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { WriteOn } from "@/components/ui/write-on";
 import { Container } from "@/components/ui/container";
 
 /*
@@ -31,12 +32,11 @@ export function JoinBand() {
       <Container className="flex flex-col gap-8 pt-14 pb-36 sm:pt-16 lg:max-w-[80rem] lg:flex-row lg:items-end lg:justify-between lg:pt-20">
         <div>
           <p className="text-sm font-semibold tracking-[0.18em] text-white/60 uppercase">Join the movement</p>
-          <h2
+          <WriteOn
             id="join-title"
             className="mt-3 max-w-[26ch] [font-family:Cambria,Georgia,serif] text-[2rem]/[2.5rem] font-medium text-balance sm:text-[2.5rem]/[3rem] lg:text-[2.75rem]/[3.25rem]"
-          >
-            Become a citizen evaluator or community champion.
-          </h2>
+            text="Become a citizen evaluator or community champion."
+          />
           <p className="mt-4 max-w-xl text-base/7 text-white/70">
             Young people across Africa are tracking the projects meant for their communities. Join them.
           </p>

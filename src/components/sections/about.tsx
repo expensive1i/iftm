@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { AboutPhotos } from "@/components/sections/about-photos";
 import { Container } from "@/components/ui/container";
+import { WriteOn } from "@/components/ui/write-on";
 
 /*
  * A brief "How it began" (from the current ifollowthemoney.org About page).
@@ -47,17 +48,15 @@ export function About() {
           <p className="text-sm font-semibold tracking-[0.18em] text-primary uppercase">
             How it began
           </p>
-          <h2
+          <WriteOn
             id="about-title"
             className="mt-4 [font-family:Cambria,Georgia,serif] text-[2.25rem]/[2.75rem] font-medium text-balance text-black sm:text-[2.5rem]/[3.125rem] lg:text-[2.5rem]/[3.125rem] xl:text-[2.75rem]/[3.375rem]"
-          >
-            <span className="sm:block sm:whitespace-nowrap">
-              It started with one community.
-            </span>{" "}
-            <span className="sm:block sm:whitespace-nowrap">
-              Now it’s a movement.
-            </span>
-          </h2>
+            text={[
+              { line: "It started with one community." },
+              " ",
+              { line: "Now it’s a movement." },
+            ]}
+          />
           {/* Soft hyphens (­) let long words break so the justified
               lines stay even in every browser. */}
           <p

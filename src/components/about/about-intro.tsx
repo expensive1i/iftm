@@ -1,8 +1,10 @@
+import { WriteOn } from "@/components/ui/write-on";
 import { Container } from "@/components/ui/container";
 
 /*
  * Straight after the About banner: the impact statement in large type (with
- * the figures picked out as chips, like the home page statement), then the
+ * the figures picked out as chips, like the home page statement), written
+ * in on scroll, then the
  * two paragraphs about the movement at full width.
  * Copy from the current ifollowthemoney.org About page.
  */
@@ -10,19 +12,21 @@ export function AboutIntro() {
   return (
     <section aria-label="What we have achieved" className="bg-white">
       <Container className="py-16 sm:py-20 lg:max-w-[80rem] lg:py-24">
-        {/* `data-written` shows the chips filled in, with no scroll effect */}
-        <p
+        {/* Written word by word with GSAP each time it scrolls into view */}
+        <WriteOn
+          as="p"
           lang="en"
-          data-written
-          className="ftm-statement [font-family:Cambria,Georgia,serif] text-[1.375rem]/[2.35rem] font-medium text-pretty text-black sm:text-[2rem]/[3.25rem] lg:text-[2.5rem]/[4rem]"
-        >
-          Our team has tracked a total of{" "}
-          <span className="ftm-chip">$13.5 million</span> in government projects
-          in <span className="ftm-chip">371 grassroots communities</span> and
-          further saved the Nigerian Government the tune of{" "}
-          <span className="ftm-chip">₦447 million</span> from financial
-          leakages.
-        </p>
+          className="[font-family:Cambria,Georgia,serif] text-[1.375rem]/[2.35rem] font-medium text-pretty text-black sm:text-[2rem]/[3.25rem] lg:text-[2.5rem]/[4rem]"
+          text={[
+            "Our team has tracked a total of ",
+            { chip: "$13.5 million" },
+            " in government projects in ",
+            { chip: "371 grassroots communities" },
+            " and further saved the Nigerian Government the tune of ",
+            { chip: "₦447 million" },
+            " from financial leakages.",
+          ]}
+        />
 
         <div className="mt-10 space-y-6 border-t border-foreground/10 pt-10 text-[1.0625rem]/[1.9rem] text-muted sm:mt-14 sm:pt-12 sm:text-lg/[2rem]">
           <p lang="en" className="text-justify hyphens-manual">

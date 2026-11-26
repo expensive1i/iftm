@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
+import { WriteOn } from "@/components/ui/write-on";
 
 /*
  * Short full-width photo band with a fixed background: the page scrolls over
@@ -39,12 +40,11 @@ export function ImpactBand() {
           <p className="text-sm font-semibold tracking-[0.18em] text-white/60 uppercase">
             Where the money went
           </p>
-          <h2
+          <WriteOn
             id="impact-title"
             className="mt-3 max-w-[24ch] [font-family:Cambria,Georgia,serif] text-[2rem]/[2.5rem] font-medium text-balance sm:text-[2.5rem]/[3rem] lg:text-[2.875rem]/[3.375rem]"
-          >
-            Schools rebuilt. Clinics restored. Water flowing again.
-          </h2>
+            text="Schools rebuilt. Clinics restored. Water flowing again."
+          />
         </div>
         <Link
           href="/campaigns"

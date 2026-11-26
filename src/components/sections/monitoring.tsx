@@ -5,6 +5,7 @@ import { mapCountries } from "@/components/sections/map-countries";
 const SHOWN = 7; // flags in the stack
 const TOTAL_COUNTRIES = 54; // "54+ countries" from the current site
 import { Container } from "@/components/ui/container";
+import { WriteOn } from "@/components/ui/write-on";
 
 /**
  * The globe does the talking (after the pxxl.app hero): a dotted globe
@@ -36,12 +37,11 @@ export function Monitoring() {
           <p className="text-sm font-semibold tracking-[0.18em] text-white/55 uppercase">
             Across Africa
           </p>
-          <h2
+          <WriteOn
             id="monitoring-title"
             className="mt-3 max-w-[16ch] [font-family:Cambria,Georgia,serif] text-[2.25rem]/[2.75rem] font-medium text-balance sm:text-[2.75rem]/[3.25rem] lg:text-[3.25rem]/[3.75rem]"
-          >
-            Watching public money, country by country.
-          </h2>
+            text="Watching public money, country by country."
+          />
         </div>
 
         {/* Bottom-right row of flags, like pxxl's logo row */}
