@@ -178,6 +178,22 @@
   --chip-fill: 1;
 }
 
+/* Analytics meter: the red fill grows from the left. */
+@keyframes ftm-meter {
+  from {
+    transform: scaleX(0);
+  }
+}
+.ftm-meter {
+  transform-origin: left;
+  animation: ftm-meter 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ftm-meter {
+    animation: none;
+  }
+}
+
 /* Hero text rises in, one line after another. */
 @keyframes ftm-rise-in {
   from {

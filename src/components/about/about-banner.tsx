@@ -31,14 +31,14 @@ export function AboutBanner() {
         {/* A soft shadow keeps the text readable over any part of the photo */}
         <Container className="pt-10 pb-14 [text-shadow:0_1px_14px_rgb(0_0_0/0.45)] sm:pt-14 sm:pb-16 lg:max-w-[80rem] lg:pt-16 lg:pb-20">
           <nav aria-label="Breadcrumb">
-            <ol className="flex items-center gap-1.5 text-sm text-white/75">
+            <ol className="flex items-center gap-2 text-base text-white/80 sm:text-lg">
               <li>
                 <Link href="/" className="transition-colors hover:text-white">
                   Home
                 </Link>
               </li>
               <li aria-hidden>
-                <ChevronRight className="size-3.5" />
+                <ChevronRight className="size-4 sm:size-[1.125rem]" />
               </li>
               <li aria-current="page" className="font-medium text-white">
                 About
@@ -48,12 +48,9 @@ export function AboutBanner() {
 
           <div className="mt-8 grid gap-6 lg:mt-10 lg:grid-cols-[1.5fr_1fr] lg:items-end lg:gap-16">
             <div>
-              <p className="text-sm font-semibold tracking-[0.18em] text-white/70 uppercase">
-                About us
-              </p>
               <h1
                 id="about-page-title"
-                className="mt-4 [font-family:Cambria,Georgia,serif] text-[2.5rem]/[3rem] font-medium text-balance sm:text-[3rem]/[3.625rem] lg:text-[3.25rem]/[3.875rem]"
+                className="[font-family:Cambria,Georgia,serif] text-[2.5rem]/[3rem] font-medium text-balance sm:text-[3rem]/[3.625rem] lg:text-[3.25rem]/[3.875rem]"
               >
                 Africa’s largest citizen‑led accountability movement.
               </h1>
