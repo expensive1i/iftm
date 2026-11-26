@@ -1,0 +1,258 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens
+ * ------------------------------------------------------------------
+ * Colours come from the Follow The Money logo: one strong red and the
+ * wordmark grey. Semantic tokens live on :root and are exposed to
+ * Tailwind via @theme inline, so components use semantic utilities
+ * (bg-surface, text-muted, bg-primary…) instead of raw hex values.
+ * Brand assets (patterns, backgrounds, motifs) live in /public/brand.
+ */
+
+:root {
+  --background: #fafaf8;
+  --foreground: #1c1c1c;
+
+  --surface: #ffffff;
+  --surface-muted: #f2f2f0;
+
+  --muted: #5e5e5e;
+  --border: #e6e6e3;
+  --ring: #d3000f;
+
+  --primary: #d3000f;
+  --primary-hover: #a8000c;
+  --primary-deep: #6e0008;
+  --primary-foreground: #ffffff;
+
+  --accent: #fde8e9;
+  --accent-foreground: #a8000c;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-deep: var(--primary-deep);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-montserrat), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+  }
+
+  ::selection {
+    @apply bg-primary text-primary-foreground;
+  }
+}
+
+/*
+ * Above 1440px everything scales up in proportion (all sizes are rem),
+ * so very wide screens and zoomed-out pages keep the desktop layout.
+ */
+@media (min-width: 1441px) {
+  html {
+    font-size: min(1.1111vw, 36px);
+  }
+}
+
+/*
+ * Buttons: their normal look at rest (solid red, or white with a light
+ * border). On hover they lift into 3D: the button rises up and to the left
+ * onto a solid offset block of its own shade (deep red under red buttons,
+ * brand grey under white ones), with no blur. A click presses it back down.
+ * Kept outside @layer so it wins over Tailwind utilities.
+ */
+.btn-sweep {
+  --off: 4px;
+  --edge: var(--muted);
+  border-width: 1.5px;
+  border-style: solid;
+  box-shadow: 0 0 0 var(--edge);
+  transform: translate(0, 0);
+  transition:
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+  &:hover,
+  &:focus-visible {
+    border-color: var(--edge);
+    transform: translate(calc(var(--off) * -1), calc(var(--off) * -1));
+    box-shadow: var(--off) var(--off) 0 var(--edge);
+  }
+  &:active {
+    transform: translate(0, 0);
+    box-shadow: 0 0 0 var(--edge);
+    transition-duration: 0.06s;
+  }
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+  }
+}
+
+/* Big hero buttons lift onto a deeper block. */
+.btn-sweep.h-12,
+.btn-sweep.h-14 {
+  --off: 5px;
+}
+
+/* Red buttons: border matches the fill at rest, deep red when lifted. */
+.btn-sweep.bg-primary {
+  --edge: var(--primary-deep);
+  border-color: var(--primary);
+}
+.btn-sweep.bg-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+/* White buttons keep their light border at rest. */
+.btn-sweep-invert:hover {
+  background-color: var(--surface-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-sweep,
+  .btn-sweep:hover,
+  .btn-sweep:active {
+    transform: none;
+  }
+}
+
+/*
+ * Highlight chips: key words picked out in a soft red box, as in the
+ * statement under the hero.
+ */
+.ftm-chip {
+  /* Inline (not inline-block) so a chip can wrap like normal words and keep
+     its highlight on each line. --chip-fill (0 to 1) fades the highlight in
+     as the statement is written on scroll. */
+  --chip-fill: 0;
+  display: inline;
+  padding: 0.04em 0.3em;
+  margin: 0 0.04em;
+  border-radius: 0.3rem;
+  background: rgb(253 232 233 / var(--chip-fill));
+  color: var(--primary-hover);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+/* Statement words start faded; GSAP brings each to full on scroll. */
+.ftm-word {
+  opacity: 0.16;
+}
+.ftm-statement[data-written] .ftm-word {
+  opacity: 1;
+}
+.ftm-statement[data-written] .ftm-chip {
+  --chip-fill: 1;
+}
+
+/* Hero text rises in, one line after another. */
+@keyframes ftm-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+.ftm-rise {
+  animation: ftm-rise-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Hero diamond collage: tiles bloom in, then photos wipe across them. */
+@keyframes ftm-diamond-in {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ftm-wipe-up {
+  from { clip-path: inset(100% 0 0 0); }
+  to { clip-path: inset(0); }
+}
+@keyframes ftm-wipe-down {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0); }
+}
+@keyframes ftm-wipe-left {
+  from { clip-path: inset(0 0 0 100%); }
+  to { clip-path: inset(0); }
+}
+@keyframes ftm-wipe-right {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0); }
+}
+
+/* While a new photo wipes in it settles from a slight zoom, and the
+   photo underneath eases back and dims, so each swap reads clearly. */
+@keyframes ftm-photo-settle {
+  from { transform: scale(1.22); }
+  to { transform: none; }
+}
+@keyframes ftm-photo-leave {
+  from { transform: none; filter: brightness(1); }
+  to { transform: scale(1.08); filter: brightness(0.55); }
+}
+
+/* Full-width menus drop in from the header. */
+@keyframes ftm-menu-in {
+  from { transform: translateY(-8px); }
+  to { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-diamond],
+  [data-diamond] *,
+  .ftm-rise,
+  [data-menu] {
+    animation: none !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
